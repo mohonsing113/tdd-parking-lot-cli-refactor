@@ -12,7 +12,7 @@ class ParkingBoyFacts {
     @Test
     void should_park_a_car_to_a_parking_lot_and_get_it_back() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
         Car car = new Car();
 
@@ -25,7 +25,7 @@ class ParkingBoyFacts {
     @Test
     void should_park_multiple_cars_to_a_parking_lot_and_get_them_back() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
         Car firstCar = new Car();
         Car secondCar = new Car();
@@ -43,7 +43,7 @@ class ParkingBoyFacts {
     @Test
     void should_not_fetch_any_car_once_ticket_is_wrong() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
         Car car = new Car();
         ParkingTicket wrongTicket = new ParkingTicket(new ParkingLot());
@@ -85,7 +85,7 @@ class ParkingBoyFacts {
     @Test
     void should_not_fetch_any_car_once_ticket_is_not_provided() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
         Car car = new Car();
 
@@ -98,7 +98,7 @@ class ParkingBoyFacts {
     @Test
     void should_query_message_once_ticket_is_not_provided() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
 
         parkingBoy.fetch(null);
@@ -123,7 +123,7 @@ class ParkingBoyFacts {
     @Test
     void should_query_error_message_for_used_ticket() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
         Car car = new Car();
 
@@ -141,7 +141,7 @@ class ParkingBoyFacts {
     void should_not_park_cars_to_parking_lot_if_there_is_not_enough_position() {
         final int capacity = 1;
         ParkingLot parkingLot = new ParkingLot(capacity);
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
 
         parkingBoy.park(new Car());
@@ -153,7 +153,7 @@ class ParkingBoyFacts {
     void should_get_message_if_there_is_not_enough_position() {
         final int capacity = 1;
         ParkingLot parkingLot = new ParkingLot(capacity);
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
 
         parkingBoy.park(new Car());

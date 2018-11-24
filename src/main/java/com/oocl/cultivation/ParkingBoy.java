@@ -13,22 +13,24 @@ public class ParkingBoy {
 
     public ParkingTicket park(Car car) {
         Optional<ParkingLot> targetParkingLot = selectParkingLot(parkingLotCenter);
-        if(targetParkingLot.isPresent()) {
+        if (targetParkingLot.isPresent()) {
             ParkingLot parkingLot = targetParkingLot.get();
             ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
             parkingLot.park(parkingTicket, car);
             return parkingTicket;
-        }else{
+        } else {
             lastErrorMessage = "The parking lot is full.";
             return null;
         }
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        return parkingTicket.getParkingLot().fetch(parkingTicket);
+        Car car = parkingTicket.getParkingLot().fetch(parkingTicket);
+        if (car == null) lastErrorMessage = "Unrecognized parking ticket.";
+        return car;
     }
 
-    public Optional<ParkingLot> selectParkingLot(ParkingLotCenter parkingLotCenter){
+    public Optional<ParkingLot> selectParkingLot(ParkingLotCenter parkingLotCenter) {
         return parkingLotCenter.getParkingLots().stream()
                 .filter(parkingLot -> parkingLot.hasSpace())
                 .findFirst();
