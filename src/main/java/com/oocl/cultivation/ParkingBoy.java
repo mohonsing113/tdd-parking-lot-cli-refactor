@@ -17,6 +17,7 @@ public class ParkingBoy {
             ParkingLot parkingLot = targetParkingLot.get();
             ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
             parkingLot.park(parkingTicket, car);
+            lastErrorMessage = null;
             return parkingTicket;
         } else {
             lastErrorMessage = "The parking lot is full.";
@@ -30,6 +31,7 @@ public class ParkingBoy {
         if (!parkingTicket.isUsed()){
             car = parkingTicket.getParkingLot().fetch(parkingTicket);
             parkingTicket.setUsed(true);
+            lastErrorMessage = null;
         }
         if (car == null){
             lastErrorMessage = "Unrecognized parking ticket.";
