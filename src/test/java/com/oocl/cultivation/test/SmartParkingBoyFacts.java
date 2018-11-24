@@ -14,7 +14,7 @@ class SmartParkingBoyFacts {
     //when parkingBoy select parking lot to park car
     //then he will choose capacity with 12
     @Test
-    void should_select_fisr_parking_lot() {
+    void should_select_first_parking_lot() {
 
         ParkingLot parkingLot1 = new ParkingLot(12);
         ParkingLot parkingLot2 = new ParkingLot(9);
