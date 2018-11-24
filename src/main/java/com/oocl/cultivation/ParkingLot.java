@@ -15,7 +15,18 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
+    public void park(ParkingTicket parkingTicket, Car car){
+        cars.put(parkingTicket, car);
+    }
+    public Car fetch(ParkingTicket parkingTicket){
+        return cars.get(parkingTicket);
+    }
+
     public int getAvailableParkingPosition() {
         return cars.size() - capacity;
+    }
+
+    public boolean hasSpace() {
+        return cars.size() < capacity;
     }
 }

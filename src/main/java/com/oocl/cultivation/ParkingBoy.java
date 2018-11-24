@@ -1,22 +1,37 @@
 package com.oocl.cultivation;
 
+import java.util.Optional;
+
 public class ParkingBoy {
 
-    private final ParkingLot parkingLot;
     private String lastErrorMessage;
+    private ParkingLotCenter parkingLotCenter;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+    public ParkingBoy(ParkingLotCenter parkingLotCenter) {
+        this.parkingLotCenter = parkingLotCenter;
     }
 
     public ParkingTicket park(Car car) {
-        // TODO: Please implement the method
-        throw new RuntimeException("Not implemented");
+        Optional<ParkingLot> targetParkingLot = selectParkingLot(parkingLotCenter);
+        if(targetParkingLot.isPresent()) {
+            ParkingLot parkingLot = targetParkingLot.get();
+            ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
+            parkingLot.park(parkingTicket, car);
+            return parkingTicket;
+        }else{
+            lastErrorMessage = "The parking lot is full.";
+            return null;
+        }
     }
 
-    public Car fetch(ParkingTicket ticket) {
-        // TODO: Please implement the method
-        throw new RuntimeException("Not implemented");
+    public Car fetch(ParkingTicket parkingTicket) {
+        return parkingTicket.getParkingLot().fetch(parkingTicket);
+    }
+
+    public Optional<ParkingLot> selectParkingLot(ParkingLotCenter parkingLotCenter){
+        return parkingLotCenter.getParkingLots().stream()
+                .filter(parkingLot -> parkingLot.hasSpace())
+                .findFirst();
     }
 
     public String getLastErrorMessage() {
