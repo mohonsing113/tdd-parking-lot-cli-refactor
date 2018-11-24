@@ -161,4 +161,40 @@ class ParkingBoyFacts {
 
         assertEquals("The parking lot is full.", parkingBoy.getLastErrorMessage());
     }
+
+
+    //given 2 parking lots in parking center that both has space and assigned to parking boy
+    //when parkingBoy park car
+    //park to the first parking lot
+    @Test
+    void should_park_car_to_the_first_parking_lot() {
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot1, parkingLot2));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        Car car = new Car();
+
+        ParkingTicket ticket = parkingBoy.park(car);
+        Car fetched = parkingBoy.fetch(ticket);
+
+        assertSame(fetched, car);
+    }
+
+    //given 2 parking lots in parking center that the first one is full and the second one has space and assigned to parking boy
+    //when parkingBoy park car
+    //park to the second parking lot
+    @Test
+    void should_park_car_to_the_second_parking_lot() {
+        ParkingLot parkingLot1 = new ParkingLot(0);
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot1, parkingLot2));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        Car car = new Car();
+
+        ParkingTicket ticket = parkingBoy.park(car);
+        Car fetched = parkingBoy.fetch(ticket);
+
+        assertSame(fetched, car);
+    }
+
 }
