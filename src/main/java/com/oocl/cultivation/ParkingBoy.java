@@ -46,7 +46,7 @@ public class ParkingBoy {
 
     public Optional<ParkingLot> selectParkingLot() {
         return parkingLotCenter.getParkingLots().stream()
-                .filter(parkingLot -> parkingLot.hasSpace())
+                .filter(ParkingLot::hasSpace)
                 .findFirst();
     }
 
