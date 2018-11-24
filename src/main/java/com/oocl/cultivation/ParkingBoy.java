@@ -28,6 +28,10 @@ public class ParkingBoy {
     public Car fetch(ParkingTicket parkingTicket) {
         Car car = null;
 
+        if(parkingTicket==null){
+            lastErrorMessage = "Please provide your parking ticket.";
+            return null;
+        }
         if (!parkingTicket.isUsed()){
             car = parkingTicket.getParkingLot().fetch(parkingTicket);
             parkingTicket.setUsed(true);
