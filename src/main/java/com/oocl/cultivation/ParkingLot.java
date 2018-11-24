@@ -19,7 +19,7 @@ public class ParkingLot {
         cars.put(parkingTicket, car);
     }
     public Car fetch(ParkingTicket parkingTicket){
-        return cars.get(parkingTicket);
+        return cars.remove(parkingTicket);
     }
 
     public int getAvailableParkingPosition() {

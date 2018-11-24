@@ -164,37 +164,50 @@ class ParkingBoyFacts {
 
 
     //given 2 parking lots in parking center that both has space and assigned to parking boy
-    //when parkingBoy park car
-    //then park to the first parking lot
+    //when parkingBoy select parking lot
+    //then he will choose first parking lot
     @Test
     void should_park_car_to_the_first_parking_lot() {
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(5);
+        ParkingLot parkingLot2 = new ParkingLot(2);
+
         ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot1, parkingLot2));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
-        Car car = new Car();
+        ParkingBoy ParkingBoy = new ParkingBoy(parkingLotCenter);
 
-        ParkingTicket ticket = parkingBoy.park(car);
-        Car fetched = parkingBoy.fetch(ticket);
+        ParkingLot selectedParkingLot = ParkingBoy.selectParkingLot().get();
 
-        assertSame(fetched, car);
+        assertSame(selectedParkingLot, parkingLot1);
     }
 
     //given 2 parking lots in parking center that the first one is full and the second one has space and assigned to parking boy
-    //when parkingBoy park car
-    //then park to the second parking lot
+    //when parkingBoy select parking lot
+    //then he will choose second parking lot
     @Test
     void should_park_car_to_the_second_parking_lot() {
         ParkingLot parkingLot1 = new ParkingLot(0);
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot(2);
+
         ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot1, parkingLot2));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
-        Car car = new Car();
+        ParkingBoy ParkingBoy = new ParkingBoy(parkingLotCenter);
 
-        ParkingTicket ticket = parkingBoy.park(car);
-        Car fetched = parkingBoy.fetch(ticket);
+        ParkingLot selectedParkingLot = ParkingBoy.selectParkingLot().get();
 
-        assertSame(fetched, car);
+        assertSame(selectedParkingLot, parkingLot2);
+    }
+
+    //given full parking lot
+    //when parkingBoy fetch one car
+    //then he can park a new car
+    @Test
+    void should_fetch_car_and_remove_from_parking_lot() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
+        ParkingBoy ParkingBoy = new ParkingBoy(parkingLotCenter);
+        Car oldCar = new Car();
+        ParkingTicket oldTicket = ParkingBoy.park(oldCar);
+        ParkingBoy.fetch(oldTicket);
+
+        assertNotNull(ParkingBoy.park(new Car()));
     }
 
 }

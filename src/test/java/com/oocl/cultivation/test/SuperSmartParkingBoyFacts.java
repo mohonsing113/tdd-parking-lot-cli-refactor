@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 class SuperSmartParkingBoyFacts {
 
-    //given 2 parking lots in parking center that capacity are 1/5  and 0/2 and assigned to smart parking boy
-    //when parkingBoy select parking lot to park car
+    //given 2 parking lots in parking center that capacity are 1/5 (80%)  and 0/2(100%) and assigned to SuperSmartParkingBoy
+    //when SuperSmartParkingBoy select parking lot to park car
     //then he will choose capacity with 0/2
     @Test
     void should_select_second_parking_lot() {
@@ -28,7 +28,7 @@ class SuperSmartParkingBoyFacts {
         assertSame(selectedParkingLot, parkingLot2);
     }
 
-    //given 2 parking lots in parking center with both full and assigned to smart parking boy
+    //given 2 parking lots in parking center with both full and assigned to SuperSmartParkingBoy
     //when SuperSmartParkingBoy select parking lot to park car
     //then car will not parked
     @Test
