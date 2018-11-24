@@ -4,15 +4,15 @@ import java.util.Optional;
 
 public class ParkingBoy {
 
-    private String lastErrorMessage;
-    private ParkingLotCenter parkingLotCenter;
+    protected String lastErrorMessage;
+    protected ParkingLotCenter parkingLotCenter;
 
     public ParkingBoy(ParkingLotCenter parkingLotCenter) {
         this.parkingLotCenter = parkingLotCenter;
     }
 
     public ParkingTicket park(Car car) {
-        Optional<ParkingLot> targetParkingLot = selectParkingLot(parkingLotCenter);
+        Optional<ParkingLot> targetParkingLot = selectParkingLot();
         if (targetParkingLot.isPresent()) {
             ParkingLot parkingLot = targetParkingLot.get();
             ParkingTicket parkingTicket = new ParkingTicket(parkingLot);
@@ -44,7 +44,7 @@ public class ParkingBoy {
         return car;
     }
 
-    public Optional<ParkingLot> selectParkingLot(ParkingLotCenter parkingLotCenter) {
+    public Optional<ParkingLot> selectParkingLot() {
         return parkingLotCenter.getParkingLots().stream()
                 .filter(parkingLot -> parkingLot.hasSpace())
                 .findFirst();
