@@ -26,28 +26,24 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        Car car = null;
-
-        if(parkingTicket==null){
+        if (parkingTicket == null) {
             lastErrorMessage = "Please provide your parking ticket.";
             return null;
         }
-        if (!parkingTicket.isUsed()){
-            car = parkingTicket.getParkingLot().fetch(parkingTicket);
-            parkingTicket.setUsed(true);
-            lastErrorMessage = null;
-        }
-        if (car == null){
+        if (parkingTicket.isUsed()) {
             lastErrorMessage = "Unrecognized parking ticket.";
+            return null;
         }
-
+        lastErrorMessage = "Unrecognized parking ticket.";
+        Car car = parkingTicket.getParkingLot().fetch(parkingTicket);
+        parkingTicket.setUsed(true);
         return car;
     }
 
     public Optional<ParkingLot> selectParkingLot() {
         return parkingLots.stream()
-                .filter(ParkingLot::hasSpace)
-                .findFirst();
+            .filter(ParkingLot::hasSpace)
+            .findFirst();
     }
 
     public String getLastErrorMessage() {
