@@ -157,14 +157,14 @@ class ParkingBoyFacts {
     //then he will choose first parking lot
     @Test
     void should_park_car_to_the_first_parking_lot() {
-        ParkingLot parkingLot1 = new ParkingLot(5);
-        ParkingLot parkingLot2 = new ParkingLot(2);
+        ParkingLot parkingLotWithMoreSpace = new ParkingLot(5);
+        ParkingLot parkingLotWithLessSpace = new ParkingLot(2);
 
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot1, parkingLot2));
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLotWithMoreSpace, parkingLotWithLessSpace));
 
         ParkingLot selectedParkingLot = parkingBoy.selectParkingLot().get();
 
-        assertSame(selectedParkingLot, parkingLot1);
+        assertSame(selectedParkingLot, parkingLotWithMoreSpace);
     }
 
     //given 2 parking lots in parking center that the first one is full and the second one has space and assigned to parking boy
@@ -172,13 +172,13 @@ class ParkingBoyFacts {
     //then he will choose second parking lot
     @Test
     void should_park_car_to_the_second_parking_lot() {
-        ParkingLot parkingLot1 = new ParkingLot(0);
-        ParkingLot parkingLot2 = new ParkingLot(2);
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot1, parkingLot2));
+        ParkingLot parkingLotFull = new ParkingLot(0);
+        ParkingLot parkingLotHasSpace = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLotFull, parkingLotHasSpace));
 
         ParkingLot selectedParkingLot = parkingBoy.selectParkingLot().get();
 
-        assertSame(selectedParkingLot, parkingLot2);
+        assertSame(selectedParkingLot, parkingLotHasSpace);
     }
 
     //given full parking lot
