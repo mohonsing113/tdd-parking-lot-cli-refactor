@@ -9,15 +9,15 @@ public class ParkingTicket {
         used = false;
     }
 
-    public ParkingLot getParkingLot() {
+    ParkingLot getParkingLot() {
         return parkingLot;
     }
 
-    public boolean isUsed() {
+    boolean isUsed() {
         return used;
     }
 
-    public void setUsed(boolean used) {
+    void setUsed(boolean used) {
         this.used = used;
     }
 }
