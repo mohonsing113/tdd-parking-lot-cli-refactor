@@ -1,16 +1,15 @@
 package com.oocl.cultivation;
 
-import java.util.Comparator;
-import java.util.Optional;
+import java.util.*;
 
 public class SmartParkingBoy extends ParkingBoy {
-    public SmartParkingBoy(ParkingLotCenter parkingLotCenter) {
-        super(parkingLotCenter);
+    public SmartParkingBoy(List<ParkingLot> parkingLots) {
+        super(parkingLots);
     }
 
     @Override
     public Optional<ParkingLot> selectParkingLot() {
-        return parkingLotCenter.getParkingLots().stream()
+        return parkingLots.stream()
                 .filter(ParkingLot::hasSpace)
                 .max(Comparator.comparing(ParkingLot::getAvailableParkingPosition));
     }

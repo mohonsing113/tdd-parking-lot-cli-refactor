@@ -1,10 +1,12 @@
 package com.oocl.cultivation.test;
 
-import com.oocl.cultivation.*;
+import com.oocl.cultivation.Car;
+import com.oocl.cultivation.ParkingBoy;
+import com.oocl.cultivation.ParkingLot;
+import com.oocl.cultivation.ParkingTicket;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,8 +14,7 @@ class ParkingBoyFacts {
     @Test
     void should_park_a_car_to_a_parking_lot_and_get_it_back() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
         Car car = new Car();
 
         ParkingTicket ticket = parkingBoy.park(car);
@@ -25,8 +26,7 @@ class ParkingBoyFacts {
     @Test
     void should_park_multiple_cars_to_a_parking_lot_and_get_them_back() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
         Car firstCar = new Car();
         Car secondCar = new Car();
 
@@ -43,8 +43,7 @@ class ParkingBoyFacts {
     @Test
     void should_not_fetch_any_car_once_ticket_is_wrong() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
         Car car = new Car();
         ParkingTicket wrongTicket = new ParkingTicket(new ParkingLot());
 
@@ -57,8 +56,7 @@ class ParkingBoyFacts {
     @Test
     void should_query_message_once_the_ticket_is_wrong() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
         ParkingTicket wrongTicket = new ParkingTicket(parkingLot);
 
         parkingBoy.fetch(wrongTicket);
@@ -70,8 +68,7 @@ class ParkingBoyFacts {
     @Test
     void should_clear_the_message_once_the_operation_is_succeeded() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
         ParkingTicket wrongTicket = new ParkingTicket(parkingLot);
 
         parkingBoy.fetch(wrongTicket);
@@ -84,9 +81,7 @@ class ParkingBoyFacts {
 
     @Test
     void should_not_fetch_any_car_once_ticket_is_not_provided() {
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(new ParkingLot()));
         Car car = new Car();
 
         ParkingTicket ticket = parkingBoy.park(car);
@@ -97,9 +92,7 @@ class ParkingBoyFacts {
 
     @Test
     void should_query_message_once_ticket_is_not_provided() {
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(new ParkingLot()));
 
         parkingBoy.fetch(null);
 
@@ -110,8 +103,7 @@ class ParkingBoyFacts {
 
     @Test
     void should_not_fetch_any_car_once_ticket_has_been_used() {
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(new ParkingLot()));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(new ParkingLot()));
         Car car = new Car();
 
         ParkingTicket ticket = parkingBoy.park(car);
@@ -123,8 +115,7 @@ class ParkingBoyFacts {
     @Test
     void should_query_error_message_for_used_ticket() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
         Car car = new Car();
 
         ParkingTicket ticket = parkingBoy.park(car);
@@ -141,8 +132,7 @@ class ParkingBoyFacts {
     void should_not_park_cars_to_parking_lot_if_there_is_not_enough_position() {
         final int capacity = 1;
         ParkingLot parkingLot = new ParkingLot(capacity);
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
 
         parkingBoy.park(new Car());
 
@@ -153,8 +143,7 @@ class ParkingBoyFacts {
     void should_get_message_if_there_is_not_enough_position() {
         final int capacity = 1;
         ParkingLot parkingLot = new ParkingLot(capacity);
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
 
         parkingBoy.park(new Car());
         parkingBoy.park(new Car());
@@ -171,10 +160,9 @@ class ParkingBoyFacts {
         ParkingLot parkingLot1 = new ParkingLot(5);
         ParkingLot parkingLot2 = new ParkingLot(2);
 
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot1, parkingLot2));
-        ParkingBoy ParkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot1, parkingLot2));
 
-        ParkingLot selectedParkingLot = ParkingBoy.selectParkingLot().get();
+        ParkingLot selectedParkingLot = parkingBoy.selectParkingLot().get();
 
         assertSame(selectedParkingLot, parkingLot1);
     }
@@ -186,11 +174,9 @@ class ParkingBoyFacts {
     void should_park_car_to_the_second_parking_lot() {
         ParkingLot parkingLot1 = new ParkingLot(0);
         ParkingLot parkingLot2 = new ParkingLot(2);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot1, parkingLot2));
 
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot1, parkingLot2));
-        ParkingBoy ParkingBoy = new ParkingBoy(parkingLotCenter);
-
-        ParkingLot selectedParkingLot = ParkingBoy.selectParkingLot().get();
+        ParkingLot selectedParkingLot = parkingBoy.selectParkingLot().get();
 
         assertSame(selectedParkingLot, parkingLot2);
     }
@@ -201,13 +187,12 @@ class ParkingBoyFacts {
     @Test
     void should_fetch_car_and_remove_from_parking_lot() {
         ParkingLot parkingLot = new ParkingLot(1);
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy ParkingBoy = new ParkingBoy(parkingLotCenter);
+        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(parkingLot));
         Car oldCar = new Car();
-        ParkingTicket oldTicket = ParkingBoy.park(oldCar);
-        ParkingBoy.fetch(oldTicket);
+        ParkingTicket oldTicket = parkingBoy.park(oldCar);
+        parkingBoy.fetch(oldTicket);
 
-        assertNotNull(ParkingBoy.park(new Car()));
+        assertNotNull(parkingBoy.park(new Car()));
     }
 
 }

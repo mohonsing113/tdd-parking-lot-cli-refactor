@@ -6,9 +6,9 @@ import java.util.List;
 public class ServiceManager extends ParkingBoy{
     private List<ParkingBoy> parkingBoys;
 
-    public ServiceManager(ParkingLotCenter parkingLotCenter) {
-        super(parkingLotCenter);
-        parkingBoys = new ArrayList<>();
+    public ServiceManager(List<ParkingLot> parkingLots) {
+        super(parkingLots);
+        this.parkingBoys = new ArrayList<>();
     }
 
     public void addParkingBoy(ParkingBoy parkingBoy){

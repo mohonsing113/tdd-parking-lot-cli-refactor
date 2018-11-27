@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,10 +17,10 @@ class ServiceManagerFacts {
     @Test
     void should_order_to_park_a_car_to_a_parking_lot_and_get_it_back() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
-        ServiceManager serviceManager = new ServiceManager(parkingLotCenter);
+        ServiceManager serviceManager = new ServiceManager(parkingLots);
         serviceManager.addParkingBoy(parkingBoy);
 
         Car car = new Car();
@@ -38,10 +38,10 @@ class ServiceManagerFacts {
     @Test
     void should_park_a_car_to_a_parking_lot_and_get_it_back() {
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
-        ServiceManager serviceManager = new ServiceManager(parkingLotCenter);
+        ServiceManager serviceManager = new ServiceManager(parkingLots);
 
         Car car = new Car();
 
@@ -57,10 +57,10 @@ class ServiceManagerFacts {
         System.setOut(new PrintStream(outContent));
 
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLotCenter parkingLotCenter = new ParkingLotCenter(Arrays.asList(parkingLot));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotCenter);
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
-        ServiceManager serviceManager = new ServiceManager(parkingLotCenter);
+        ServiceManager serviceManager = new ServiceManager(parkingLots);
         serviceManager.addParkingBoy(parkingBoy);
 
         serviceManager.orderToFetch(parkingBoy, null);

@@ -1,14 +1,14 @@
 package com.oocl.cultivation;
 
-import java.util.Optional;
+import java.util.*;
 
 public class ParkingBoy {
 
     protected String lastErrorMessage;
-    protected ParkingLotCenter parkingLotCenter;
+    protected List<ParkingLot> parkingLots;
 
-    public ParkingBoy(ParkingLotCenter parkingLotCenter) {
-        this.parkingLotCenter = parkingLotCenter;
+    public ParkingBoy(List<ParkingLot> parkingLots) {
+        this.parkingLots = parkingLots;
     }
 
     public ParkingTicket park(Car car) {
@@ -45,7 +45,7 @@ public class ParkingBoy {
     }
 
     public Optional<ParkingLot> selectParkingLot() {
-        return parkingLotCenter.getParkingLots().stream()
+        return parkingLots.stream()
                 .filter(ParkingLot::hasSpace)
                 .findFirst();
     }
