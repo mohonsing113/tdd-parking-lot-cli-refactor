@@ -19,7 +19,7 @@ class SuperSmartParkingBoyFacts {
         ParkingLot parkingLotWithLessSpaceRate = new ParkingLot();
         parkingLotWithLessSpaceRate.park(new ParkingTicket(parkingLotWithLessSpaceRate), new Car());
         ParkingLot parkingLotWithMoreSpaceRate = new ParkingLot();
-        
+
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(Arrays.asList(parkingLotWithMoreSpaceRate, parkingLotWithLessSpaceRate));
 
         ParkingLot selectedParkingLot = superSmartParkingBoy.selectParkingLot().get();

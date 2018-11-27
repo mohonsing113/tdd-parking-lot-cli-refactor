@@ -22,15 +22,15 @@ public class ParkingLot {
         return cars.remove(parkingTicket);
     }
 
-    public int getAvailableParkingPosition() {
+    int getAvailableParkingPosition() {
         return capacity - cars.size();
     }
 
-    public int getAvailablePositionRate(){
+    int getAvailablePositionRate(){
         return getAvailableParkingPosition()/capacity;
     }
 
-    public boolean hasSpace() {
+    boolean hasSpace() {
         return cars.size() < capacity;
     }
 }
